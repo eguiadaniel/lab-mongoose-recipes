@@ -14,14 +14,37 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(self => {
+  .then((self) => {
     console.log(`Connected to the database: "${self.connection.name}"`);
     // Before adding any documents to the database, let's delete all previous entries
     return self.connection.dropDatabase();
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
+    console.log('Connection has been made');
+    // Create recipe commented not to be created agfain over and over
+    /*return Recipe.create({
+      title: 'Alubias negras de Tolosa',
+      level: 'Easy Peasy',
+      ingredients: [
+        'alubias negras de Tolosa',
+        'piparras',
+        'chorizo',
+        'morcilla',
+        'agua',
+        'sal'
+      ],
+      cuisine: 'basque traditional',
+      dishType: 'main_course',
+      image:
+        'https://recetasdecocina.elmundo.es/wp-content/uploads/2017/12/principal3.jpg',
+      duration: 210,
+      creator: 'Daniel Eguia'
+    });*/
   })
-  .catch(error => {
+  .then((recipe) => {
+    console.log(recipe);
+  })
+  .catch((error) => {
     console.error('Error connecting to the database', error);
   });
